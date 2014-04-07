@@ -1,49 +1,75 @@
 define(function() {
-    function generateRandomArray(length) {
+    function generateRandomArray(frequency, amplitude, postiveOnly) {
         var array = [];
-        console.log("length: " + length);
-        for (var i = 0; i < length; i++) {
-            array.push(Math.random());
+        console.log("frequency: " + frequency + ", amplitude: " + amplitude);
+        for (var i = 0; i < frequency; i++) {
+            var newValue = postiveOnly ? Math.random() * amplitude : ((Math.random() * 2) - 1) * amplitude;
+            array.push(newValue);
         }
         return array;
     }
 
     function scaleArray(array, factor) {
-        var newArray = [];
+        var newArray = array.length > 1 ? [] : array;
         for (var i = 0; i < array.length; i++) {
+            var a = array[i],
+                b = array[i+1];
             for (var j = 0; j < factor; j++) {
-                newArray.push(array[i]);
+                var newValue;
+                if(b) {
+                    newValue = lerp(a, b, j/factor);
+                } else {
+                    newValue = a;
+                }
+                newArray.push(newValue);
             }
         }
         return newArray;
     }
 
-    function averageArrays(arr1, arr2) {
-        var result = [];
-        if (arr1.length !== arr2.length) throw new Error("Can't average arrays of different lengths.");
-        for(var i = 0; i < arr1.length; i++) {
-            result.push((arr1[i] + arr2[i]) / 2);
+    function lerp(a, b, x) {
+        return a * (1-x) + b*x;
+    }
+
+    function averageArrays(arrays) {
+        var averageArray = sumArrays(arrays);
+        for (var i = 0; i < averageArray.length; i++) {
+            averageArray[i] /= arrays.length;
         }
-        return result;
+        return averageArray;
+    }
+
+    function sumArrays(arrays) {
+        var sumArray = [];
+        for (var i = 0; i < arrays[0].length; i++) {
+            sumArray.push(0);
+        }
+        for (var i = 0; i < arrays.length; i++) {
+            for (var j = 0; j < arrays[i].length; j++) {
+                sumArray[j] += arrays[i][j];
+            }
+        }
+        return sumArray;
     }
 
     var Noise = {
-        perlin1d: function(length, factor) {
-            noiseArray = new Array(factor);
-            for (var i = 0; i < factor; i++) {
-                if(i === 0) {
-                    noiseArray[i] = generateRandomArray(length);
-                } else {
-                    var divider = Math.pow(2, i),
-                        newArray = generateRandomArray(length / divider);
-                    newArray = scaleArray(newArray, Math.pow(2, i));
-                    noiseArray[i] = averageArrays(noiseArray[i-1], newArray);
-                }
+        perlin1d: function(length) {
+            noiseArray = [];
+            var i = 0,
+                frequency = length / Math.pow(2, i);
+            while (frequency > 1) {
+                var amplitude = 1/(frequency/4);
+                noiseArray.push(generateRandomArray(frequency, amplitude));
+                noiseArray[i] = scaleArray(noiseArray[i], Math.pow(2, i))
+                frequency = length / Math.pow(2, ++i);
             }
-            console.log(noiseArray);
-            return noiseArray[noiseArray.length-1];
+            return [sumArrays(noiseArray), noiseArray];
+                
         },
-        generateRandomArray: generateRandomArray
+        generateRandomSortedArray: function(length) {
+            var array = generateRandomArray(length, 1, true);
+            return array.sort();
+        }
     }
 
     return Noise;

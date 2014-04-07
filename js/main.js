@@ -7,7 +7,7 @@ require.config({
 
 require( ["js/models/world.js", "js/views/world.js"],
   function(WorldModel, WorldView) {
-      var worldModel = new WorldModel(64);
+      var worldModel = new WorldModel(60);
       new WorldView(worldModel);
   }
 );
