@@ -1,4 +1,4 @@
-define(function() {
+define(['js/controllers/valuemapper.js'], function(ValueMapper) {
     function generateRandomArray(frequency, amplitude, postiveOnly) {
         var array = [];
         console.log("frequency: " + frequency + ", amplitude: " + amplitude);
@@ -52,6 +52,8 @@ define(function() {
         return sumArray;
     }
 
+    console.log(ValueMapper);
+
     var Noise = {
         perlin1d: function(length) {
             noiseArray = [];
@@ -69,6 +71,17 @@ define(function() {
         generateRandomSortedArray: function(length) {
             var array = generateRandomArray(length, 1, true);
             return array.sort();
+        },
+        generateWeightedRandomArray: function(length, offset) {
+            var array = this.perlin1d(length)[0];
+            offset = offset || 0;
+            for (var i = 0; i < length; i++) {
+                var halfwayPoint = (length - 1)/2;
+                var distToMiddle = Math.abs(halfwayPoint - i);
+                array[i] = array[i] * ValueMapper.transform(distToMiddle, 0, halfwayPoint, 1, 0) + offset;
+            }
+            console.log(array);
+            return array;
         }
     }
 
