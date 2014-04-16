@@ -80,6 +80,20 @@ define(['js/controllers/valuemapper.js'], function(ValueMapper) {
                 array[i] = array[i] * ValueMapper.transform(distToMiddle, 0, halfwayPoint, 1, 0);
             }
             return array;
+        },
+
+        generateTerrainArrays: function(segmentCount) {
+            var segments = new Array(segmentCount);
+            var numberOfPositions = 0;
+            for(var i = 0; i < segments.length; i++) {
+                var segmentLength = Math.pow(2, Math.ceil(3 + Math.random() * 3));
+                segments[i] = this.generateWeightedRandomArray(segmentLength);
+                numberOfPositions+= segments[i].length;
+            }
+            // flatten segments array
+            var terrain = [].concat.apply([], segments);
+
+            return terrain;
         }
     }
 
