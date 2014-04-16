@@ -72,13 +72,12 @@ define(['js/controllers/valuemapper.js'], function(ValueMapper) {
             var array = generateRandomArray(length, 1, true);
             return array.sort();
         },
-        generateWeightedRandomArray: function(length, offset) {
+        generateWeightedRandomArray: function(length) {
             var array = this.perlin1d(length)[0];
-            offset = offset || 0;
             for (var i = 0; i < length; i++) {
                 var halfwayPoint = (length - 1)/2;
                 var distToMiddle = Math.abs(halfwayPoint - i);
-                array[i] = array[i] * ValueMapper.transform(distToMiddle, 0, halfwayPoint, 1, 0) + offset;
+                array[i] = array[i] * ValueMapper.transform(distToMiddle, 0, halfwayPoint, 1, 0);
             }
             console.log(array);
             return array;
