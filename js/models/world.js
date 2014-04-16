@@ -12,10 +12,7 @@ define(["js/controllers/noise.js"], function(Noise) {
             this.positions = Noise.generateRandomSortedArray(this.heightmap.length - 2);
             this.positions.splice(0, 0, 0);
             this.positions.push(1);
-            this.heightmap = perlin;
-            // this.debugMap = perlin[1];
-            this.heightmap[this.heightmap.length-1] = this.heightmap[0];
-
+            this.colour = "#" + (Math.floor(Math.random() * 16777215)).toString(16);
         }
     }
 
