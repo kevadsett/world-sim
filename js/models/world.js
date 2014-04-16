@@ -7,8 +7,9 @@ define(["js/controllers/noise.js"], function(Noise) {
     WorldModel.prototype = {
         init: function() {
             console.log("World model initialised");
-            var perlin = Noise.generateWeightedRandomArray(this.length, Math.random() * 2 - 1);
-            this.positions = Noise.generateRandomSortedArray(this.length - 2);
+            var segmentCount = Math.ceil(Math.random()*25 + 25);
+            this.heightmap = Noise.generateTerrainArrays(segmentCount);
+            this.positions = Noise.generateRandomSortedArray(this.heightmap.length - 2);
             this.positions.splice(0, 0, 0);
             this.positions.push(1);
             this.heightmap = perlin;
