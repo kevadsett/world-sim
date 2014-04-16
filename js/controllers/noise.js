@@ -79,7 +79,6 @@ define(['js/controllers/valuemapper.js'], function(ValueMapper) {
                 var distToMiddle = Math.abs(halfwayPoint - i);
                 array[i] = array[i] * ValueMapper.transform(distToMiddle, 0, halfwayPoint, 1, 0);
             }
-            console.log(array);
             return array;
         }
     }
