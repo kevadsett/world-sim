@@ -1,4 +1,6 @@
-define(["js/controllers/noise.js"], function(Noise) {
+define(function(require) {
+    var Noise = require('js/controllers/noise');
+    
     var WorldModel = function(length){
         this.length = length;
         this.init();

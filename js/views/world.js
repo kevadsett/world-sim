@@ -1,4 +1,5 @@
-define(function() {
+define(function(require) {
+
     var WorldView = function(model){
         this.model = model;
         this.canvas = document.getElementById('game-canvas');

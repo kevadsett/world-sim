@@ -1,4 +1,6 @@
-define(['js/controllers/valuemapper.js'], function(ValueMapper) {
+define(function(require) {
+    var ValueMapper = require('js/controllers/valuemapper');
+    
     function generateRandomArray(frequency, amplitude, postiveOnly) {
         var array = [];
         console.log("frequency: " + frequency + ", amplitude: " + amplitude);
