@@ -18,26 +18,33 @@ define(function(require) {
             positions = model.positions,
             colour = model.colour;
 
+        var camera = require('js/models/camera.js').getInstance();
+
         context.fillStyle = colour;
         context.strokeStyle = "#000000";
         context.beginPath();
         var radialPositions = [];
         for (var i = 0; i < positions.length; i++) {
-            radialPositions.push(twoPi * positions[i]);
+            // hack for reversed positions...
+            radialPositions.push(twoPi * positions[positions.length-1-i]);
         }
+        context.save();
+        context.translate(camera.position.x, camera.position.y);
+        context.rotate(camera.rotation);
         context.beginPath();
         for(var i = 0; i < heightmap.length; i++) {
             var offset1 = 150 + (-heightmap[i]) * 1,
                 offset2 = 150 + (-heightmap[i+1]) * 1;
-            var x1 = width/2 + Math.sin(radialPositions[i]) * offset1,
-                y1 = height /2 + Math.cos(radialPositions[i]) * offset1,
-                x2 = width/2 + Math.sin(radialPositions[i+1]) * offset2,
-                y2 = height/2 + Math.cos(radialPositions[i+1]) * offset2;
+            var x1 = Math.sin(radialPositions[i]) * offset1,
+                y1 = Math.cos(radialPositions[i]) * offset1,
+                x2 = Math.sin(radialPositions[i+1]) * offset2,
+                y2 = Math.cos(radialPositions[i+1]) * offset2;
             context.lineTo(x1, y1, x2, y2);
         }
         context.fill();
         context.stroke();
         context.closePath();
+        context.restore();
 
     }
 
