@@ -22,12 +22,14 @@ define(function(require) {
 
     function onKeyDown(event) {
         switch(event.which) {
-            case 189:
+            case 40:
             case 109:
+            case 189:
                 worldEvents.emit('zoom', false);
                 break;
-            case 187:
+            case 38:
             case 107:
+            case 187:
                 worldEvents.emit('zoom', true);
                 break;
         }
