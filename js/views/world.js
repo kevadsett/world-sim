@@ -18,7 +18,7 @@ define(function(require) {
             positions = model.positions,
             colour = model.colour;
 
-        var camera = require('js/models/camera.js').getInstance();
+        var camera = require('js/controllers/camera.js').getInstance();
 
         context.fillStyle = colour;
         context.strokeStyle = "#000000";
