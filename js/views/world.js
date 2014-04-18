@@ -4,7 +4,7 @@ define(function(require) {
         this.model = model;
         this.canvas = document.getElementById('game-canvas');
         this.ctx = this.canvas.getContext('2d');
-        this.render();
+        worldEvents.on('render', this.render, this);
     }
 
     function drawWorld(model, canvas) {
