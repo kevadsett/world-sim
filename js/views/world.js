@@ -29,8 +29,8 @@ define(function(require) {
         context.rotate(camera.rotation);
         context.beginPath();
         for(var i = 0; i < heightmap.length; i++) {
-            var offset1 = 150 + (-heightmap[i]) * 1,
-                offset2 = 150 + (-heightmap[i+1]) * 1;
+            var offset1 = 150 + camera.yOffset -heightmap[i] * camera.zoomFactor / 10,
+                offset2 = 150 + camera.yOffset -heightmap[i+1] * camera.zoomFactor / 10;
             var x1 = Math.sin(radialPositions[i]) * offset1,
                 y1 = Math.cos(radialPositions[i]) * offset1,
                 x2 = Math.sin(radialPositions[i+1]) * offset2,
