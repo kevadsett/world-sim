@@ -32,6 +32,14 @@ define(function(require) {
             case 187:
                 worldEvents.emit('zoom', true);
                 break;
+            case 37:
+            case 65:
+                worldEvents.emit('rotate', false);
+                break;
+            case 39:
+            case 68:
+                worldEvents.emit('rotate', true);
+                break;
         }
     }
 
