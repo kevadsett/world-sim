@@ -1,8 +1,7 @@
 define(function(require) {
     var Noise = require('js/controllers/noise');
     
-    var WorldModel = function(length){
-        this.length = length;
+    var WorldModel = function(){
         this.init();
     }
 
