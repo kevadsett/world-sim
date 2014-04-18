@@ -1,23 +1,11 @@
 define(function(require) {
-    var instance;
+    var Camera = function(attributes) {
+        this.position = attributes.position || {x: attributes.width/2, y: attributes.height/2};
+        if(this.position === undefined) throw new Error('Error: no camera position attributes defined');
+        this.zoomFactor = attributes.zoomFactor || 0;
+        this.rotation = attributes.rotation || 0;
 
-    var Camera = function(width, height, attributes) {
-        if(instance === undefined) {
-            this.position = attributes.position || {x: width/2, y: height/2};
-            this.zoomFactor = attributes.zoomFactor || 0;
-            this.rotation = attributes.rotation || 0;
-            instance = this;
-        } else {
-            throw new Error("Error: Camera is already instansiated.");
-        }
-    }
-
-    Camera.getInstance = function() {
-        if(instance === undefined) {
-            throw new Error("Error: Camera has not been instansiated yet.");
-        } else {
-            return instance;
-        }
+        console.log("New camera instantiated. position: [" + this.position.x + ", " + this.position.y + "], zoomFactor: " + this.zoomFactor + ", rotation: " + 360 * (this.rotation / Math.PI * 2));
     }
 
     return Camera;
