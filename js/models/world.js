@@ -8,7 +8,7 @@ define(function(require) {
     WorldModel.prototype = {
         init: function() {
             console.log("World model initialised");
-            var segmentCount = Math.ceil(Math.random()*25 + 25);
+            var segmentCount = Math.ceil(Math.random()*50 + 50);
             this.heightmap = Noise.generateTerrainArrays(segmentCount);
             this.positions = Noise.generateRandomSortedArray(this.heightmap.length - 2);
             this.positions.splice(0, 0, 0);

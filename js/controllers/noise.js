@@ -88,7 +88,7 @@ define(function(require) {
             var segments = new Array(segmentCount);
             var numberOfPositions = 0;
             for(var i = 0; i < segments.length; i++) {
-                var segmentLength = Math.pow(2, Math.ceil(3 + Math.random() * 3));
+                var segmentLength = Math.pow(2, Math.ceil(3 + Math.random() * 9));
                 segments[i] = this.generateWeightedRandomArray(segmentLength);
                 numberOfPositions+= segments[i].length;
             }
