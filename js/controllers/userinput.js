@@ -17,12 +17,26 @@ define(function(require) {
         } 
         x -= Math.round($target.offset().left);
         y -= Math.round($target.offset().top);
-        console.log(x, y);
+        worldEvents.emit('canvasClicked', {x:x, y:y});
+    }
+
+    function onKeyDown(event) {
+        switch(event.which) {
+            case 189:
+            case 109:
+                worldEvents.emit('zoom', false);
+                break;
+            case 187:
+            case 107:
+                worldEvents.emit('zoom', true);
+                break;
+        }
     }
 
     UserInputController.prototype = {
         listenToEvents: function() {
             $('#game-canvas').on('click', onCanvasClicked);
+            $(document).on('keydown', onKeyDown);
         }
     }
 
