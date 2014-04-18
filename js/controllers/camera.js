@@ -23,6 +23,7 @@ define(function(require) {
     Camera.prototype = {
         setupListeners: function() {
             worldEvents.on('zoom', this.onZoom, this);
+            worldEvents.on('rotate', this.onRotate, this);
         },
 
         onZoom: function(zoomIn) {
@@ -35,6 +36,15 @@ define(function(require) {
             instance.yOffset = (instance.zoomFactor * 150 / 20)
             instance.position.y = instance.height/2 + instance.yOffset;
 
+            this.debugCameraChange();
+        },
+
+        onRotate: function(rotateRight) {
+            if(rotateRight) {
+                instance.rotation -= Math.PI / 100;
+            } else {
+                instance.rotation += Math.PI / 100;
+            }
             this.debugCameraChange();
         },
 
