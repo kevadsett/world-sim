@@ -15,7 +15,7 @@ define(function(require) {
             height = canvas.height,
             width = canvas.width,
             heightmap = model.heightmap,
-            positions = model.positions,
+            radialPositions = model.radialPositions,
             colour = model.colour;
 
         var camera = require('js/controllers/camera.js').getInstance();
@@ -23,11 +23,7 @@ define(function(require) {
         context.fillStyle = colour;
         context.strokeStyle = "#000000";
         context.beginPath();
-        var radialPositions = [];
-        for (var i = 0; i < positions.length; i++) {
-            // hack for reversed positions...
-            radialPositions.push(twoPi * positions[positions.length-1-i]);
-        }
+
         context.save();
         context.translate(camera.position.x, camera.position.y);
         context.rotate(camera.rotation);
