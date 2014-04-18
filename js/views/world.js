@@ -19,7 +19,7 @@ define(function(require) {
             colour = model.colour;
 
         var camera = require('js/controllers/camera.js').getInstance();
-
+        context.clearRect(0, 0, width, height);
         context.fillStyle = colour;
         context.strokeStyle = "#000000";
         context.beginPath();
