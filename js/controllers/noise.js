@@ -3,7 +3,6 @@ define(function(require) {
     
     function generateRandomArray(frequency, amplitude, postiveOnly) {
         var array = [];
-        console.log("frequency: " + frequency + ", amplitude: " + amplitude);
         for (var i = 0; i < frequency; i++) {
             var newValue = postiveOnly ? Math.random() * amplitude : ((Math.random() * 2) - 1) * amplitude;
             array.push(newValue);
